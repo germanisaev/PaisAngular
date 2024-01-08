@@ -1,0 +1,7 @@
+<div class="card-list-footer">
+    <i (click)="prevPage()"
+    [ngClass]="{'card-pagination-icon-disabled': currentIndex === 0}" class="fa fa-chevron-left card-pagination-icon"></i>
+    <i (click)="nextPage()"
+    [ngClass]="{'card-pagination-icon-disabled': currentIndex >= (totalList.length - pageCount)}"
+    class="fa fa-chevron-right card-pagination-icon card-pagination-icon--right"></i>
+</div>

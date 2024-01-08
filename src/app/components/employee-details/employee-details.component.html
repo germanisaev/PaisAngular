@@ -1,0 +1,74 @@
+
+<div class="card mt-3 mb-3">
+    <div class="card-header">
+        <div *ngIf="employee; else other_content;">Edit Employee</div>
+        <ng-template #other_content>Add Employee</ng-template>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="detailForm" (ngSubmit)="onSubmit()"> 
+            <input type="hidden" formControlName="employeeId">
+            <input type="hidden" formControlName="userName">
+            <div class="form-group">
+                <label for="firstName"><span style="color: red">*</span>First Name</label>
+                <input type="text" formControlName="firstName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" />
+                    <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName"><span style="color: red">*</span>Last Name</label>
+                <input type="text" formControlName="lastName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" />
+                    <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="roleCompany"><span style="color: red">*</span>Role Company</label>
+                <select class="form-control" id="roleCompany" formControlName="roleCompany" 
+                [ngClass]="{ 'is-invalid': submitted && f['roleCompany'].errors }">
+                    <option value="default">--Select a role company--</option>
+                    <option *ngFor="let c of roles" [ngValue]="c.roleId">{{c.roleName}}</option>
+                </select>
+                    <div *ngIf="submitted && f['roleCompany'].errors" class="invalid-feedback">
+                        <div *ngIf="f['roleCompany'].errors['required']">Role Company is required</div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="departmentId"><span style="color: red">*</span>Department</label> 
+                <select class="form-control" id="departmentId" formControlName="departmentId" 
+                [ngClass]="{ 'is-invalid': submitted && f['departmentId'].errors }">
+                    <option value="default">--Select a departments--</option>
+                    <option *ngFor="let c of departments" [ngValue]="c.departmentId">{{c.departmentName}}</option>
+                </select>
+                    <div *ngIf="submitted && f['departmentId'].errors" class="invalid-feedback">
+                        <div *ngIf="f['departmentId'].errors['required']">Department is required</div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="ageDate"><span style="color: red">*</span>Age</label>
+                <select class="form-control" id="ageDate" formControlName="ageDate" [ngClass]="{ 'is-invalid': submitted && f['ageDate'].errors }">
+                    <option value="default">--Select a ages--</option>
+                    <option *ngFor="let c of ages" [ngValue]="c.key">{{c.value}}</option>
+                </select>
+                    <div *ngIf="submitted && f['ageDate'].errors" class="invalid-feedback">
+                        <div *ngIf="f['ageDate'].errors['required']">Age is required</div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="carOwner">Car Owner</label>
+                <input
+                    type="checkbox"
+                    formControlName="carOwner"
+                    class="form-check-input"
+                    [ngClass]="{ 'is-invalid': submitted && f['carOwner'].errors }"
+                />
+            </div>
+            <div class="form-group card-button-save">
+                <button type="submit" class="btn btn-success">Save</button> &nbsp; <!-- [disabled]="!detailForm.valid" -->
+                <button type="reset" class="btn btn-light">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

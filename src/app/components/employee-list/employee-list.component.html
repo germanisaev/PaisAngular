@@ -1,0 +1,101 @@
+<div class="row mb-3">
+    <div class="col-md-4 col-xs-12 mt-3">
+        <input type="text" id="search-text" class="form-control" name="searchText" aria-describedby="search-text"
+            [(ngModel)]="searchText" placeholder="Enter text to search" autofocus>
+    </div>
+    <div class="col-md-4 col-xs-12 mt-3">
+        <select [(ngModel)]="sortText" class="form-control">
+            <option value="">Choose record for sort</option>
+            <option value="firstName">firstName</option>
+            <option value="lastName">lastName</option>
+            <option value="roleCompany">roleCompany</option>
+            <option value="departmentId">departmentId</option>
+            <option value="ageDate">ageDate</option>
+            <option value="carOwner">carOwner</option>
+        </select>
+    </div>
+    <div class="col-md-4 col-xs-12 mt-3">
+        <a class="btn btn-primary" (click)="addItem(true)">Add</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">RoleCompany</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">CarOwner</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of (employees | filter: searchText 
+                                                   | sortBy: 'asc|desc': sortText 
+                                                   | paginate: {
+                                                        itemsPerPage: pageSize,
+                                                        currentPage: page,
+                                                        totalItems: count
+                                                    }) as result; let i=index"
+                [class.item-selected]="item === employeeDetail">
+                    <th>{{item.employeeId}}</th>
+                    <td>{{item.firstName}}</td>
+                    <td>{{item.lastName}}</td>
+                    <td>{{roleName(item.roleCompany)}}</td>
+                    <td>{{deptName(item.departmentId)}}</td>
+                    <td>{{ageName(item.ageDate)}}</td>
+                    <td><div class="isCar" [ngStyle]="item.carOwner == '1' ? {'visibility': 'visible'} : {'visibility': 'hidden'}"></div></td>
+                    <td>
+                        <a class="btn btn-primary" (click)="selectItem(item)">Edit</a>&nbsp;
+                        <a class="btn btn-danger" (click)="open(DeleteModal, item.employeeId)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <pagination-controls
+              previousLabel="Prev"
+              nextLabel="Next"
+              [responsive]="true"
+              (pageChange)="handlePageChange($event)"
+            ></pagination-controls>
+    </div>
+</div>
+
+<ng-template #DeleteModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure to delete this?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>
+    </div>
+</ng-template>
+
+<!-- <ng-template #AddModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        fgkhfdgjkfdh
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Submit</button>
+    </div>
+</ng-template> -->

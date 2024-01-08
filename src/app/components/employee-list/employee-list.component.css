@@ -1,0 +1,3 @@
+.isCar::before {
+    content: '✓';
+}

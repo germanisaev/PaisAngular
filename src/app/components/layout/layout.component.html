@@ -1,0 +1,13 @@
+<div class="container bg-container">
+    <div class="row" *ngIf="(account$ | async) as account">
+        <div class="col-md-4 col-xs-12">Welcome to site user: {{account.username}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <app-employee-list [employees]="employees" [departments]="departments" [roles]="roles" [ages]="Ages" (onSelected)='selected($event)' (onReset)="reseted($event)"></app-employee-list>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <app-employee-details [employee]="employee" [employees]="employees" [departments]="departments" [roles]="roles" [ages]="Ages" [isReset]="isReset" (onAdded)='addItem($event)'></app-employee-details>
+        </div>
+    </div>
+</div>
