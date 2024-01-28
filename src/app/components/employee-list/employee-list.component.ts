@@ -58,9 +58,9 @@ export class EmployeeListComponent implements OnInit, OnChanges {
     private _service: EmployeeService, 
     private ref: ChangeDetectorRef) { }
   
-  deptName(deptId: any) { return this.departments.find(x => x.departmentId == deptId)?.departmentName; }
-  roleName(roleId: any) { return this.roles.find(x => x.roleId == roleId)?.roleName; }
-  ageName(key: any) { return this.ages.find(x => x.key == key)?.value; }
+  //deptName(deptId: any) { return this.departments.find(x => x.departmentId == deptId)?.departmentName; }
+  //roleName(roleId: any) { return this.roles.find(x => x.roleId == roleId)?.roleName; }
+  //ageName(key: any) { return this.ages.find(x => x.key == key)?.value; }
 
   setCurrentPageArr(slicedArr: Array<any>) {
     this.pagedData = slicedArr;
@@ -71,19 +71,27 @@ export class EmployeeListComponent implements OnInit, OnChanges {
       if(changes.hasOwnProperty(propName)) {
         switch(propName) {
           case 'employees': {
-            this.doEmployees(this.employees);
+            if(changes['employees'].isFirstChange()) {
+              this.doEmployees(this.employees);
+            }
             break;
           }
           case 'departments': {
-            this.doDepartments(this.departments);
+            if(changes['departments'].isFirstChange()) {
+              this.doDepartments(this.departments);
+            }
             break;
           }
           case 'roles': {
-            this.doRoles(this.roles);
+            if(changes['roles'].isFirstChange()) {
+              this.doRoles(this.roles);
+            }
             break;
           }
           case 'ages': {
-            this.doAges(this.ages);
+            if(changes['ages'].isFirstChange()) {
+              this.doAges(this.ages);
+            }
             break;
           }
         }

@@ -67,6 +67,12 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._serviceEmployee.refreshNeeded$.subscribe(() => {
+      this.getEmployees();
+      //this.getInit();
+    });
+
+    this.getEmployees();
     this.getInit();
   }
 
@@ -80,7 +86,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   private getInit() {
     
-    this.getEmployees();
+    //this.getEmployees();
 
     const departmentSubscription = this._serviceDepartment.getItems()
       .subscribe((itms: Department[]) => {

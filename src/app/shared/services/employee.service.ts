@@ -54,7 +54,7 @@ export class EmployeeService {
     }
 
     createItem(item: Employee): Observable<Employee> { 
-        return this.http.post<Employee>(`${REST_API_SERVER}/addemployee`, JSON.stringify(item), this.httpOptions)
+        return this.http.post<Employee>(`${REST_API_SERVER}/addemployee`, item, this.httpOptions)
             .pipe(
                 tap(() => {
                     this._refreshNeeded$.next();
@@ -76,7 +76,7 @@ export class EmployeeService {
     }
   
     patchItem(item: Employee, id: number) {
-        return this.http.patch(`${REST_API_SERVER}/updateemployee/${id}`, JSON.stringify(item), this.httpOptions)
+        return this.http.patch(`${REST_API_SERVER}/updateemployee/${id}`, item, this.httpOptions)
             .pipe(
                 tap(() => {
                     this._refreshNeeded$.next();
@@ -87,7 +87,7 @@ export class EmployeeService {
     }
 
     updateItem(item: Employee) { // https://localhost:7266/api/Employee/updateemployee
-        return this.http.put(`${REST_API_SERVER}/updateemployee`, JSON.stringify(item), this.httpOptions)
+        return this.http.put(`${REST_API_SERVER}/updateemployee`, item, this.httpOptions)
             .pipe(
                 tap(() => {
                     this._refreshNeeded$.next();

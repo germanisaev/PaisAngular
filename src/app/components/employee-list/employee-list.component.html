@@ -46,9 +46,12 @@
                     <th>{{item.employeeId}}</th>
                     <td>{{item.firstName}}</td>
                     <td>{{item.lastName}}</td>
-                    <td>{{roleName(item.roleCompany)}}</td>
+                    <td>{{item.roleCompany}}</td>
+                    <td>{{item.departmentId}}</td>
+                    <td>{{item.ageDate}}</td>
+                    <!-- <td>{{roleName(item.roleCompany)}}</td>
                     <td>{{deptName(item.departmentId)}}</td>
-                    <td>{{ageName(item.ageDate)}}</td>
+                    <td>{{ageName(item.ageDate)}}</td> -->
                     <td><div class="isCar" [ngStyle]="item.carOwner == '1' ? {'visibility': 'visible'} : {'visibility': 'hidden'}"></div></td>
                     <td>
                         <a class="btn btn-primary" (click)="selectItem(item)">Edit</a>&nbsp;
